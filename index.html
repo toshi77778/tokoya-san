@@ -1,701 +1,506 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>とこやさん | 小牧市のアットホームな理容室・出張カット</title>
-    <meta name="description" content="愛知県小牧市の理容室「とこやさん」。待ち時間なしのシステムと出張カット対応。NPO法人全国介護理美容福祉協会登録店。">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* --- 1. Variables & Reset --- */
-        :root {
-            /* Theme Colors based on PDF (Warm/Brown/Orange) */
-            --primary-color: #6d4c41; /* 落ち着いたブラウン */
-            --accent-color: #f39c12; /* 明るいオレンジ */
-            --bg-color: #fcfbf9; /* 優しい生成り色 */
-            --section-bg: #ffffff;
-            --text-color: #4e342e; /* 濃いブラウンのテキスト */
-            --text-light: #795548;
-            
-            --font-base: 'Noto Sans JP', sans-serif;
-            --font-head: 'Zen Maru Gothic', sans-serif;
-            
-            --shadow: 0 4px 20px rgba(109, 76, 65, 0.1);
-            --transition: all 0.3s ease;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>とこやさん tokoya-san 床屋 出張カット 訪問カット 小牧 春日井 北名古屋</title>
+<meta name="copyright" content="Toshiharu Niwa" />
+<meta name="description" content="とこやさんホームページ">
+<meta name="keywords" content="床屋,とこやさん,小牧,春日井,北名古屋,出張カット,訪問カット,tokoya-san,藤野 公彦">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 
-        body {
-            font-family: var(--font-base);
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            line-height: 1.8;
-            overflow-x: hidden;
-        }
+<style>
+  /* 基本設定 */
+  :root {
+    --primary-color: #333;
+    --accent-color: #d35400;
+    --bg-color: #f9f9f9;
+    --text-color: #444;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+  }
 
-        a { text-decoration: none; color: inherit; transition: var(--transition); }
-        ul { list-style: none; }
-        img { width: 100%; display: block; }
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: var(--accent-color);
+  }
 
-        /* --- 2. Animations --- */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+  /* アニメーション用クラス */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-        .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+  /* ヘッダー */
+  header {
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
 
-        /* --- 3. Header --- */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border-top: 5px solid var(--primary-color);
-        }
+  .header-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
 
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  .logo img {
+    height: 50px;
+    transition: transform 0.3s ease;
+  }
 
-        .logo {
-            font-family: var(--font-head);
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo i { color: var(--accent-color); font-size: 1.4rem; }
+  .logo img:hover {
+    transform: scale(1.05);
+  }
 
-        /* Navigation */
-        .nav-menu { display: flex; gap: 25px; }
-        .nav-link {
-            font-weight: 700;
-            color: var(--text-color);
-            position: relative;
-            font-size: 0.95rem;
-            font-family: var(--font-head);
-            letter-spacing: 0.05em;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--accent-color);
-            transition: var(--transition);
-        }
-        
-        .nav-link:hover::after { width: 100%; }
+  .contact-info {
+    text-align: right;
+    font-size: 0.9em;
+  }
 
-        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-color); }
+  .contact-info strong {
+    font-size: 1.4em;
+    color: var(--accent-color);
+  }
 
-        /* --- 4. Hero Section --- */
-        .hero {
-            position: relative;
-            height: 85vh;
-            background: linear-gradient(rgba(109, 76, 65, 0.3), rgba(109, 76, 65, 0.3)), 
-                        url('https://images.unsplash.com/photo-1503951914875-befbb713d052?q=80&w=1920&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-        }
+  /* ナビゲーション */
+  nav {
+    background: var(--primary-color);
+  }
 
-        .hero-content {
-            z-index: 2;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 4px;
-            max-width: 800px;
-            color: var(--text-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            border-top: 5px solid var(--accent-color);
-        }
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
 
-        .hero-title {
-            font-size: 2.5rem;
-            font-family: var(--font-head);
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
+  nav ul li {
+    flex: 1;
+    text-align: center;
+  }
 
-        .hero-subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            color: var(--text-light);
-            font-weight: 500;
-        }
+  nav ul li a {
+    display: block;
+    color: #fff;
+    padding: 15px 0;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+  }
 
-        .btn-main {
-            display: inline-block;
-            padding: 12px 40px;
-            background: var(--accent-color);
-            color: white;
-            font-weight: bold;
-            font-family: var(--font-head);
-            border-radius: 50px;
-            box-shadow: 0 4px 10px rgba(243, 156, 18, 0.4);
-        }
+  nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+  }
 
-        .btn-main:hover {
-            background: var(--primary-color);
-            transform: translateY(-2px);
-        }
+  nav ul li a:hover::after {
+    width: 100%;
+  }
 
-        /* --- 5. Common Sections --- */
-        section { padding: 80px 20px; }
-        .container { max-width: 1000px; margin: 0 auto; }
+  /* メインビジュアル（トップ画像） */
+  .hero {
+    width: 100%;
+    max-height: 400px;
+    overflow: hidden;
+    position: relative;
+  }
 
-        .section-header { text-align: center; margin-bottom: 50px; }
-        .section-title {
-            font-size: 2rem;
-            font-family: var(--font-head);
-            color: var(--primary-color);
-            display: inline-block;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background-color: var(--accent-color);
-        }
-        
-        .section-header p {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
+  .hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+    animation: zoomIn 10s infinite alternate;
+  }
 
-        /* --- 6. News Section --- */
-        .news-wrapper {
-            background: var(--section-bg);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            border-left: 5px solid var(--primary-color);
-        }
+  @keyframes zoomIn {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+  }
 
-        .news-item {
-            display: flex;
-            align-items: baseline;
-            padding: 15px 0;
-            border-bottom: 1px dashed #e0e0e0;
-            flex-wrap: wrap;
-        }
-        
-        .news-item:last-child { border-bottom: none; }
+  /* レイアウト */
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    gap: 30px;
+  }
 
-        .news-date {
-            font-weight: bold;
-            color: var(--primary-color);
-            width: 130px;
-            font-family: 'Helvetica Neue', sans-serif;
-        }
+  .main-content {
+    flex: 2;
+    min-width: 300px;
+  }
 
-        .news-badge {
-            background: var(--accent-color);
-            color: white;
-            padding: 3px 10px;
-            font-size: 0.75rem;
-            border-radius: 3px;
-            margin-right: 15px;
-        }
+  .sidebar {
+    flex: 1;
+    min-width: 250px;
+  }
 
-        /* --- 7. Concept --- */
-        .features-section { background-color: #f7f3e8; }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+  /* セクションタイトル */
+  h2, h3 {
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    position: relative;
+  }
 
-        .feature-card {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            border-bottom: 3px solid var(--accent-color);
-        }
+  h2 span, h3 span {
+    display: block;
+    font-size: 0.5em;
+    color: #888;
+    font-weight: normal;
+  }
 
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
+  /* コンセプト部分 */
+  .concept-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
 
-        .feature-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-            font-family: var(--font-head);
-        }
+  .concept-box img {
+    max-width: 150px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
 
-        /* --- 8. Menu --- */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
+  .price-highlight {
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
 
-        .menu-category h3 {
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            border-left: 5px solid var(--accent-color);
-            padding-left: 15px;
-            margin-bottom: 20px;
-            font-family: var(--font-head);
-            background: #fff8e1;
-            padding-top: 5px;
-            padding-bottom: 5px;
-        }
+  /* ニュース部分 */
+  .news-list {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
 
-        .menu-list li {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            border-bottom: 1px dotted #ccc;
-            padding-bottom: 5px;
-        }
+  .news-list dl {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px dashed #ccc;
+    padding: 10px 0;
+    margin: 0;
+    transition: background 0.3s ease;
+  }
+  
+  .news-list dl:hover {
+    background: #f0f0f0;
+  }
 
-        .menu-price {
-            font-weight: bold;
-            color: var(--primary-color);
-        }
+  .news-list dt {
+    width: 100px;
+    font-weight: bold;
+    color: #666;
+  }
 
-        /* --- 9. Blog --- */
-        .blog-section { background: white; text-align: center; }
-        .blog-btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 15px 30px;
-            background: white;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-            font-weight: bold;
-            border-radius: 50px;
-            transition: all 0.3s;
-        }
-        .blog-btn:hover {
-            background: var(--primary-color);
-            color: white;
-        }
+  .news-list dd {
+    margin: 0;
+    flex: 1;
+  }
 
-        /* --- 10. Calendar --- */
-        .calendar-wrapper {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            border-top: 5px solid var(--primary-color);
-        }
-        
-        .month-header {
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            font-weight: bold;
-        }
-        
-        .days-header {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            text-align: center;
-            background: #f0ebe5;
-            padding: 8px 0;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-        
-        .days-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            text-align: center;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .day {
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
-            border-right: 1px solid #f0f0f0;
-            font-size: 0.9rem;
-        }
-        
-        /* Sat/Sun/Holiday Colors */
-        .days-header div:nth-child(1), .day:nth-child(7n+1) { color: #e74c3c; } /* Sun */
-        .days-header div:nth-child(7), .day:nth-child(7n) { color: #3498db; } /* Sat */
-        
-        /* 祝日のスタイル（日曜と同じ赤） */
-        .day.is-holiday { color: #e74c3c !important; font-weight: bold; }
+  /* サイドバー */
+  .side-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+  }
 
-        .day.is-closed { background: #eee; color: #bbb !important; }
-        .day.is-today { font-weight: bold; background: rgba(243, 156, 18, 0.2); }
+  .side-box h3 {
+    font-size: 1.2em;
+    border-bottom: 2px solid var(--accent-color);
+  }
 
-        .legend-box.closed { background: #eee; border: 1px solid #ccc; }
-        .legend-box.today { background: rgba(243, 156, 18, 0.2); border: 1px solid var(--accent-color); }
-        .legend-box.holiday { background: #fff; color: #e74c3c; border: 1px solid #e74c3c; text-align:center; line-height:13px; font-weight:bold; font-size:10px; }
-        .legend-box.holiday::after { content:"祝"; }
+  .side-menu ul {
+    list-style: none;
+    padding: 0;
+  }
 
-        /* --- 11. Access --- */
-        .access-section {
-            background: var(--primary-color);
-            color: white;
-        }
-        .access-section .section-title { color: white; }
-        .access-section .section-title::after { background-color: var(--accent-color); }
-        .access-section p { color: rgba(255,255,255,0.8); }
+  .side-menu ul li a {
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 15px;
+  }
 
-        .info-table th { color: var(--accent-color); text-align: left; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2); width: 100px; }
-        .info-table td { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2); }
-        
-        .map-container {
-            height: 350px;
-            background: #eee;
-            margin-top: 20px;
-            border-radius: 4px;
-            overflow: hidden;
-        }
+  .side-menu ul li a::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-size: 0.8em;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
-        /* --- Footer --- */
-        footer {
-            background: #3e2723;
-            color: #bcaaa4;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.85rem;
-        }
+  /* フッター */
+  footer {
+    background: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+  }
 
-        /* Mobile */
-        @media (max-width: 768px) {
-            .hero-title { font-size: 1.8rem; }
-            .menu-grid, .info-grid { grid-template-columns: 1fr; }
-            
-            .nav-menu {
-                position: fixed;
-                top: 60px;
-                right: -100%;
-                width: 70%;
-                height: 100vh;
-                background: white;
-                flex-direction: column;
-                align-items: center;
-                padding-top: 50px;
-                transition: var(--transition);
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            }
-            .nav-menu.active { right: 0; }
-            .menu-toggle { display: block; }
-        }
-    </style>
+  footer a {
+    color: #ddd;
+  }
+
+  .page-top {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: var(--accent-color);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .concept-box {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    nav ul {
+      flex-wrap: wrap;
+    }
+    nav ul li {
+      flex: 50%;
+    }
+    .header-inner {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JHGB83G213"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JHGB83G213');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-12517626-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-12517626-3');
+</script>
 </head>
 <body>
 
-    <header>
-        <div class="header-container">
-            <a href="#" class="logo">
-                <i class="fas fa-cut"></i>
-                とこやさん
-            </a>
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </div>
-            <nav>
-                <ul class="nav-menu" id="nav-list">
-                    <li><a href="#home" class="nav-link">HOME</a></li>
-                    <li><a href="#news" class="nav-link">NEWS</a></li>
-                    <li><a href="#features" class="nav-link">CONCEPT</a></li>
-                    <li><a href="#menu" class="nav-link">MENU</a></li>
-                    <li><a href="#calendar" class="nav-link">CALENDAR</a></li>
-                    <li><a href="#access" class="nav-link">ACCESS</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <a href="index.html" title="とこやさんホームページ トップページへ">
+          <img src="http://tokoya-san.com/img/logo2.png" alt="とこやさんロゴ" />
+        </a>
+      </div>
+      <div class="contact-info">
+        お問い合わせ・ご相談はお気軽にどうぞ<br />
+        <span>Tel.</span> <strong>0568-77-3335</strong>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">トップページ<br><span style="font-size:0.8em;font-weight:normal;">HOME</span></a></li>
+        <li><a href="menu.html">メニュー・料金<br><span style="font-size:0.8em;font-weight:normal;">Menu/Price</span></a></li>
+        <li><a href="shop.html">店舗のご案内<br><span style="font-size:0.8em;font-weight:normal;">Information</span></a></li>
+        <li><a href="access.html">アクセスマップ<br><span style="font-size:0.8em;font-weight:normal;">Access</span></a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content fade-in-up">
-            <h1 class="hero-title">Welcome to<br>Tokoyasan Homepage</h1>
-            <p class="hero-subtitle">小牧市にある、あなたのための「とこやさん」</p>
-            <p style="margin-bottom: 25px; font-size: 0.95rem;">
-                私は山野学苑 NPO法人全国介護理美容福祉協会<br>登録(介護)理容師です。
+  <div class="hero">
+    <img src="http://tokoya-san.com/img/top_img.jpg" alt="私たちは、自然に優しい生活を応援します。" />
+  </div>
+
+  <div class="container">
+    <div class="main-content">
+      <div class="fade-in">
+        <h2>とこやさん ホームページへ<span>Welcome to Tokoyasan Homepage</span></h2>
+      </div>
+      
+      <div class="fade-in">
+        <h3>とこやさん紹介<span>Concept</span></h3>
+        <div class="concept-box">
+          <img src="http://tokoya-san.com/img/sample_l.png" alt="店長のイメージ" />
+          <div class="concept-text">
+            <p><strong>私は山野学苑 NPO法人全国介護理美容福祉協会<br>登録(介護)理容師です。</strong></p>
+            <p>お体の不自由な方の(出張)カット致します。<br>皆様のご来店を楽しみにしております。</p>
+            <hr style="border:0; border-bottom:1px solid #eee; margin: 15px 0;">
+            <p>大人調髪 <span class="price-highlight">￥2,200(税込)</span> <span style="font-size:0.8em;">（シャンプー顔剃り込）</span><br>
+               シルバー調髪 <span class="price-highlight">￥1,800(税込)</span> <span style="font-size:0.8em;">（65才以上・平日のみ）</span><br>
+               小人調髪 <span class="price-highlight">￥1,400(税込)</span>
             </p>
-            <a href="tel:0568773335" class="btn-main"><i class="fas fa-phone-alt"></i> 0568-77-3335</a>
-        </div>
-    </section>
-
-    <section id="news" class="container">
-        <div class="section-header fade-in-up">
-            <h2 class="section-title">NEWS</h2>
-            <p>新着情報・お知らせ</p>
-        </div>
-        <div class="news-wrapper fade-in-up">
-            <div class="news-item">
-                <span class="news-date">Information</span>
-                <span class="news-badge">重要</span>
-                <span>定休日は毎週月曜、第2・3火曜です（カレンダーをご確認ください）</span>
-            </div>
-            <div class="news-item">
-                <span class="news-date">2026.02.12</span>
-                <span class="news-badge">更新</span>
-                <span>ホームページをリニューアルしました。</span>
-            </div>
-            
-            <div style="margin-top: 30px;">
-                <p style="font-weight:bold; color:var(--primary-color); border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:15px;">
-                    <i class="fas fa-rss"></i> 店長ブログ更新情報
-                </p>
-                <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" data-fw-param="38772/"></script> 
-                </div>
-        </div>
-    </section>
-
-    <section id="features" class="features-section">
-        <div class="container">
-            <div class="section-header fade-in-up">
-                <h2 class="section-title">CONCEPT</h2>
-                <p>とこやさん紹介</p>
-            </div>
-            <div class="feature-grid">
-                <div class="feature-card fade-in-up">
-                    <i class="fas fa-clock feature-icon"></i>
-                    <h3>待たずに出来ます</h3>
-                    <p>受付表にお名前を書いて頂くと目安の時間をお伝えします。その間は外出も自由です。</p>
-                </div>
-                <div class="feature-card fade-in-up">
-                    <i class="fas fa-wheelchair feature-icon"></i>
-                    <h3>出張・訪問カット</h3>
-                    <p>お体の不自由な方の出張カットも致します（要相談）。</p>
-                </div>
-                <div class="feature-card fade-in-up">
-                    <i class="fas fa-heart feature-icon"></i>
-                    <h3>マンツーマン施術</h3>
-                    <p>最初から最後までマンツーマンで担当させて頂きます。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="menu" class="container">
-        <div class="section-header fade-in-up">
-            <h2 class="section-title">MENU</h2>
-            <p>料金・メニュー（税込）</p>
-        </div>
-        <div class="menu-grid">
-            <div class="menu-category fade-in-up">
-                <h3>STANDARD</h3>
-                <ul class="menu-list">
-                    <li><span>大人調髪 <small>(顔剃り・シャンプー込)</small></span><span class="menu-price">¥2,200</span></li>
-                    <li><span>シルバー調髪 <small>(65歳以上・平日)</small></span><span class="menu-price">¥1,800</span></li>
-                    <li><span>高校生調髪</span><span class="menu-price">¥1,900</span></li>
-                    <li><span>中学生調髪</span><span class="menu-price">¥1,600</span></li>
-                    <li><span>小人調髪 <small>(小学生以下)</small></span><span class="menu-price">¥1,400</span></li>
-                </ul>
-                <p style="text-align:right; font-size:0.8rem; color:#888; margin-top:5px;"></p>
-            </div>
-            <div class="menu-category fade-in-up">
-                <h3>OPTION</h3>
-                <ul class="menu-list">
-                    <li><span>カットのみ <small>(中学生以上)</small></span><span class="menu-price">¥1,500</span></li>
-                    <li><span>女性顔剃り <small>(要予約)</small></span><span class="menu-price">¥1,700</span></li>
-                    <li><span>白髪染め調髪 <small>(要予約)</small></span><span class="menu-price">¥4,400</span></li>
-                    <li><span>出張カット</span><span class="menu-price">要相談</span></li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="blog" class="blog-section">
-        <div class="container">
-            <div class="fade-in-up">
-                <h3 style="color:var(--primary-color); margin-bottom: 20px;">MANAGER'S BLOG</h3>
-                <a href="http://ameblo.jp/tokoyasansanjou1105/" target="_blank" class="blog-btn">
-                    <i class="fas fa-pen-nib" style="margin-right:10px;"></i> とこやさん店長ブログ（アメーバ）へ
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="calendar" class="container">
-        <div class="section-header fade-in-up">
-            <h2 class="section-title">CALENDAR</h2>
-            <p>営業日カレンダー</p>
-        </div>
-        <div class="calendar-wrapper fade-in-up">
-            <div id="calendar-grid" style="display: grid; gap: 30px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));"></div>
-            
-            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px; font-size:0.9rem;">
-                <span style="display:flex; align-items:center; gap:5px;"><span class="legend-box closed" style="width:15px; height:15px; display:block;"></span> 定休日</span>
-                <span style="display:flex; align-items:center; gap:5px;"><span class="legend-box today" style="width:15px; height:15px; display:block;"></span> 今日</span>
-                <span style="display:flex; align-items:center; gap:5px;"><span class="legend-box holiday" style="width:15px; height:15px; display:block;"></span> 祝日</span>
-            </div>
-            <p style="text-align:center; margin-top:15px; font-size:0.85rem; color:#666;">
-                定休日：毎週月曜日、第2・3火曜日 <br>
-                ※月曜祝日の場合は営業し、翌火曜振替となります。
+            <p><a href="menu.html" style="color:var(--accent-color); font-weight:bold;">▶ その他料金詳細はこちらへ</a></p>
+            <hr style="border:0; border-bottom:1px solid #eee; margin: 15px 0;">
+            <p style="font-size:0.9em; color:#555;">
+              ホームページを観て頂いてありがとうございます。<br><br>
+              当店はなるべくお客様が待たずに出来るように受付表に名前を書いて頂くと、こちらから目安の時間を言うのでその頃又はお時間以降にお越し下されば良いです。<br>
+              いつでも出入り自由です。<br>
+              また遠くの方は電話していただくと時間をお取り出来ます。<br>
+              マンツーマンで最後までやらさせて頂きますので安心してお越しください。
             </p>
+          </div>
         </div>
-    </section>
+        
+        <p><a href="http://ameblo.jp/tokoyasansanjou1105/" target="_blank" style="font-weight:bold; color:var(--accent-color);">▶ とこやさん店長ブログ（アメーバブログ）やってます。</a></p>
+        <div style="margin-top:20px;">
+          <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" data-fw-param="38772/"></script>
+          </div>
+      </div>
 
-    <section id="access" class="access-section">
-        <div class="container">
-            <div class="section-header fade-in-up">
-                <h2 class="section-title">ACCESS</h2>
-                <p>店舗情報・アクセス</p>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;" class="info-grid">
-                <div class="info-detail fade-in-up">
-                    <h4 style="font-size:1.5rem; margin-bottom:20px; color:var(--accent-color);">とこやさん</h4>
-                    <table class="info-table" style="width:100%; border-collapse:collapse;">
-                        <tr><th>住所</th><td>〒485-0062 愛知県小牧市藤島町中島13-2</td></tr>
-                        <tr><th>電話</th><td><a href="tel:0568773335" style="font-size:1.2rem; font-weight:bold;">0568-77-3335</a></td></tr>
-                        <tr><th>営業時間</th><td>平日 9:30-19:30 / 土日祝 9:30-19:00</td></tr>
-                        <tr><th>定休日</th><td>毎週月曜、第2・3火曜日</td></tr>
-                        <tr><th>駐車場</th><td>店舗前2台、共同駐車場3台ほか</td></tr>
-                    </table>
-                </div>
-                <div class="map-container fade-in-up">
-                    <iframe 
-                        src="https://maps.google.com/maps?q=%E6%84%9B%E7%9F%A5%E7%9C%8C%E5%B0%8F%E7%89%A7%E5%B8%82%E8%97%A4%E5%B3%B6%E7%94%BA%E4%B8%AD%E5%B3%B613-2&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
-                    </iframe>
-                </div>
-            </div>
+      <div class="fade-in" style="margin-top:40px;">
+        <h3>新着情報<span>News</span></h3>
+        <div class="news-list">
+          <dl>
+            <dt>2025/04/17</dt>
+            <dd><a href="#">ゴールデンウィークのお知らせ記載</a></dd>
+          </dl>
+          <dl>
+            <dt>2022/07/01</dt>
+            <dd><a href="#">定休日の変更、第４月火は連休となりました。</a></dd>
+          </dl>
+          <dl>
+            <dt>2017/09/05</dt>
+            <dd><a href="#">定休日の変更、第３月火は連休となりました。</a></dd>
+          </dl>
+          <dl>
+            <dt>2017/01/14</dt>
+            <dd><a href="#">ホームページオープンしました。</a></dd>
+          </dl>
+          <dl>
+            <dt>2016/11/09</dt>
+            <dd><a href="http://ameblo.jp/tokoyasansanjou1105/" target="_blank">ブログ始めました。</a></dd>
+          </dl>
+          <dl>
+            <dt>2016/09/25</dt>
+            <dd><a href="#">とこやさん、小牧にオープン！！！</a></dd>
+          </dl>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <footer>
-        <p>© Tokoya-san All Rights Reserved.</p>
-    </footer>
+    <div class="sidebar fade-in">
+      <div class="side-box side-menu">
+        <h3>SITE MENU</h3>
+        <ul>
+          <li><a href="index.html">トップページ<br><span>HOME</span></a></li>
+          <li><a href="menu.html">メニュー・料金<br><span>Menu/Price</span></a></li>
+          <li><a href="shop.html">店舗のご案内<br><span>Information</span></a></li>
+          <li><a href="access.html">アクセスマップ<br><span>Access</span></a></li>
+        </ul>
+      </div>
 
-    <script>
-        /* * 設定エリア
-         */
-        // 定休日リスト (手動設定) - 祝日で営業する場合はここから外す
-        const manualClosedDates = [
-            // 5月 (2/23は祝日なので営業＝リストから除外、翌2/24を振替休日とする場合)
-            "2026/5/4", "2026/5/11", "2026/5/12", "2026/5/18", "2026/5/19", "2026/5/25", "2026/5/26",
-            // 6月 (3/20は祝日。金曜なので通常営業)
-            "2026/6/1", "2026/6/8", "2026/6/9", "2026/6/15", "2026/6/16", "2026/6/22", "2026/6/23" , "2026/6/29"
-        ];
+      <div class="side-box">
+        <h3>営業時間</h3>
+        <p style="font-size:0.9em; line-height:1.8;">
+          平日 / AM9:30～PM7:30<br>
+          土日祝 / AM9:30～PM7:00<br>
+          <strong>定休日：</strong>月、第２,３,４月火<br>
+          <span style="font-size:0.85em; color:#666;">※月曜祝日の場合は営業、火曜振替定休</span>
+        </p>
+      </div>
 
-        // 祝日リスト (赤色にする日)
-        const manualHolidays = [
-            "2026/2/23" , "2026/3/20" , "2026/5/4" , "2026/5/5" , "2026/5/6"
-        ];
+      <div style="font-size:0.7em; color:#999; text-align:center;">
+        デザイン・制作 <a href="http://www.megapx.com/" target="_blank" style="color:#999;">メガピクス</a><br />
+        テンプレ配布 <a href="http://www.s-hoshino.com/" target="_blank" style="color:#999;">フリー素材屋Hoshino</a><br />
+        スポンサーリンク <a href="http://y-beauty.net/blog/" target="_blank" style="color:#999;">美容の小箱</a>
+      </div>
+    </div>
+  </div>
 
-        /* --- 共通スクリプト --- */
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // Mobile Menu
-            const menuToggle = document.getElementById('mobile-menu');
-            const navList = document.getElementById('nav-list');
-            if(menuToggle){
-                menuToggle.addEventListener('click', () => {
-                    navList.classList.toggle('active');
-                });
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.addEventListener('click', () => navList.classList.remove('active'));
-                });
-            }
+  <footer>
+    <div style="margin-bottom: 20px;">
+      <a href="index.html" style="margin: 0 10px;">トップページ</a> | 
+      <a href="menu.html" style="margin: 0 10px;">メニュー・料金</a> | 
+      <a href="shop.html" style="margin: 0 10px;">店舗案内</a> | 
+      <a href="access.html" style="margin: 0 10px;">アクセスマップ</a>
+    </div>
+    <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 10px;">とこやさん</div>
+    <p style="font-size: 0.9em; margin: 0;">
+      〒485-0062 愛知県小牧市藤島町中島13-2<br>
+      TEL: 0568-77-3335
+    </p>
+    <div class="page-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+      ▲ ページトップへ戻る
+    </div>
+  </footer>
 
-            // Scroll Animation
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        obs.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const faders = document.querySelectorAll('.fade-in');
+      const appearOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+      };
 
-            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
-
-            // Calendar Generation
-            const calendarGrid = document.getElementById('calendar-grid');
-            if (calendarGrid) {
-                const today = new Date();
-                for (let i = 0; i < 2; i++) {
-                    const y = today.getFullYear();
-                    const m = today.getMonth() + i;
-                    const d = new Date(y, m, 1);
-                    createCalendar(calendarGrid, d.getFullYear(), d.getMonth());
-                }
-            }
+      const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
+            return;
+          } else {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
         });
+      }, appearOptions);
 
-        function createCalendar(container, year, month) {
-            const monthNames = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const firstDayIndex = new Date(year, month, 1).getDay();
-            const today = new Date();
+      faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+      });
+    });
+  </script>
 
-            const monthDiv = document.createElement('div');
-            monthDiv.style.border = "1px solid #ddd";
-            monthDiv.style.background = "#fff";
-            
-            let html = `
-                <div class="month-header">${year}年 ${monthNames[month]}</div>
-                <div class="days-header">
-                    <div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div>
-                </div>
-                <div class="days-grid">
-            `;
-
-            for (let i = 0; i < firstDayIndex; i++) html += `<div class="day"></div>`;
-
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dateStr = `${year}/${month + 1}/${day}`;
-                const isClosed = manualClosedDates.includes(dateStr);
-                const isHoliday = manualHolidays.includes(dateStr);
-                const isToday = (year === today.getFullYear() && month === today.getMonth() && day === today.getDate());
-                
-                // クラス付与: 祝日なら is-holiday を追加
-                html += `<div class="day ${isClosed ? 'is-closed' : ''} ${isHoliday ? 'is-holiday' : ''} ${isToday ? 'is-today' : ''}">
-                            ${day}
-                         </div>`;
-            }
-
-            html += `</div>`;
-            monthDiv.innerHTML = html;
-            container.appendChild(monthDiv);
-        }
-    </script>
 </body>
 </html>

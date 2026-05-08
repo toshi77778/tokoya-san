@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>メニュー・料金 | とこやさん tokoya-san 小牧 春日井 北名古屋</title>
+<meta name="copyright" content="Toshiharu Niwa" />
+<meta name="description" content="とこやさんホームページ メニュー・料金">
+<meta name="keywords" content="床屋,とこやさん,料金,メニュー,小牧,春日井,北名古屋,出張カット,訪問カット,tokoya-san">
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  /* 基本設定 (index.htmlと共通) */
+  :root {
+    --primary-color: #333;
+    --accent-color: #d35400;
+    --bg-color: #f9f9f9;
+    --text-color: #444;
+    --white: #ffffff;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+  }
+
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: var(--accent-color);
+  }
+
+  /* フェードインアニメーション */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ヘッダー */
+  header {
+    background: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .header-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+
+  .logo img {
+    height: 50px;
+  }
+
+  .contact-info {
+    text-align: right;
+    font-size: 0.9em;
+  }
+
+  .contact-info strong {
+    font-size: 1.4em;
+    color: var(--accent-color);
+  }
+
+  /* ナビゲーション */
+  nav {
+    background: var(--primary-color);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  nav ul li {
+    flex: 1;
+    text-align: center;
+  }
+
+  nav ul li a {
+    display: block;
+    color: #fff;
+    padding: 15px 0;
+    font-weight: bold;
+    position: relative;
+  }
+
+  nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+  }
+
+  nav ul li a:hover::after, nav ul li a.active::after {
+    width: 100%;
+  }
+
+  /* パンくずリスト */
+  .breadcrumb {
+    max-width: 1000px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+    font-size: 0.85em;
+    color: #888;
+  }
+
+  /* メインレイアウト */
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+    gap: 30px;
+  }
+
+  .main-content {
+    flex: 2;
+    min-width: 300px;
+  }
+
+  .sidebar {
+    flex: 1;
+    min-width: 250px;
+  }
+
+  h2 {
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+  }
+
+  h2 span {
+    display: block;
+    font-size: 0.5em;
+    color: #888;
+    font-weight: normal;
+  }
+
+  /* メニューテーブルのスタイル */
+  .menu-section {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+  }
+
+  .menu-section h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    border-left: 5px solid var(--accent-color);
+    padding-left: 15px;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+  }
+
+  .menu-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .menu-table tr {
+    border-bottom: 1px solid #eee;
+  }
+
+  .menu-table tr:last-child {
+    border-bottom: none;
+  }
+
+  .menu-table th {
+    text-align: left;
+    padding: 15px 10px;
+    width: 40%;
+    vertical-align: top;
+  }
+
+  .menu-table th span {
+    display: block;
+    font-size: 0.75em;
+    color: #888;
+    font-weight: normal;
+    margin-top: 5px;
+  }
+
+  .menu-table td {
+    padding: 15px 10px;
+    text-align: right;
+    font-weight: bold;
+  }
+
+  .price-tag {
+    color: var(--accent-color);
+    font-size: 1.1em;
+  }
+
+  .note {
+    color: #e74c3c;
+    font-size: 0.85em;
+    font-weight: normal;
+    display: block;
+    margin-top: 5px;
+  }
+
+  /* サイドバー (index.htmlと共通) */
+  .side-box {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+  }
+
+  .side-box h3 {
+    font-size: 1.1em;
+    border-bottom: 2px solid var(--accent-color);
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+  }
+
+  .side-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .side-menu ul li a {
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    padding-left: 15px;
+    position: relative;
+  }
+
+  .side-menu ul li a::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-size: 0.8em;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* フッター */
+  footer {
+    background: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 50px;
+  }
+
+  .page-top {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: var(--accent-color);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .page-top:hover {
+    background: #e67e22;
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 768px) {
+    .header-inner { flex-direction: column; gap: 10px; }
+    nav ul { flex-wrap: wrap; }
+    nav ul li { flex: 50%; }
+    .menu-table th, .menu-table td { display: block; width: 100%; text-align: left; padding: 10px; }
+    .menu-table td { text-align: right; padding-top: 0; }
+  }
+</style>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JHGB83G213"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JHGB83G213');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-12517626-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-12517626-3');
+</script>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <a href="index.html">
+          <img src="http://tokoya-san.com/img/logo2.png" alt="とこやさんロゴ" />
+        </a>
+      </div>
+      <div class="contact-info">
+        お問い合わせ・ご相談はお気軽にどうぞ<br />
+        <span>Tel.</span> <strong>0568-77-3335</strong>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">トップページ<br><span style="font-size:0.7em;font-weight:normal;">HOME</span></a></li>
+        <li><a href="menu.html" class="active">メニュー・料金<br><span style="font-size:0.7em;font-weight:normal;">Menu/Price</span></a></li>
+        <li><a href="shop.html">店舗のご案内<br><span style="font-size:0.7em;font-weight:normal;">Information</span></a></li>
+        <li><a href="access.html">アクセスマップ<br><span style="font-size:0.7em;font-weight:normal;">Access</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="index.html">トップページ</a> ＞ <strong>メニュー・料金</strong>
+  </div>
+
+  <div class="container">
+    <div class="main-content">
+      <div class="fade-in">
+        <h2>メニュー・料金<span>Menu / Price</span></h2>
+      </div>
+
+      <div class="menu-section fade-in">
+        <h3>カット料金</h3>
+        <table class="menu-table">
+          <tr>
+            <th>カットのみ (中学生以上)</th>
+            <td><span class="price-tag">1,500円</span> (税込)</td>
+          </tr>
+          <tr>
+            <th>カットのみ (小学生以下)</th>
+            <td><span class="price-tag">1,300円</span> (税込)</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="menu-section fade-in">
+        <h3>調髪コース<span>※顔そり、シャンプー込</span></h3>
+        <table class="menu-table">
+          <tr>
+            <th>大人調髪</th>
+            <td><span class="price-tag">2,200円</span> (税込)</td>
+          </tr>
+          <tr>
+            <th>シルバー調髪<br><span>※65才以上・平日のみ</span></th>
+            <td><span class="price-tag">1,800円</span> (税込)</td>
+          </tr>
+          <tr>
+            <th>高校生調髪</th>
+            <td><span class="price-tag">1,900円</span> (税込)</td>
+          </tr>
+          <tr>
+            <th>中学生調髪</th>
+            <td><span class="price-tag">1,600円</span> (税込)</td>
+          </tr>
+          <tr>
+            <th>小学生以下調髪</th>
+            <td><span class="price-tag">1,400円</span> (税込)</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="menu-section fade-in">
+        <h3>オプション・その他</h3>
+        <table class="menu-table">
+          <tr>
+            <th>顔剃りのみ</th>
+            <td><span class="price-tag">1,200円</span> (税込)</td>
+          </tr>
+          <tr>
+            <th>女性顔剃り<br><span>※予約可能</span></th>
+            <td><span class="price-tag">1,700円</span> (税込)</td>
+          </tr>
+          <tr>
+            <th>白髪染め調髪<br><span>※予約可能</span></th>
+            <td><span class="price-tag">4,400円</span> (税込)</td>
+          </tr>
+          <tr>
+            <th>白髪染めのみ<br><span>※予約可能</span></th>
+            <td><span class="price-tag">2,900円</span> (税込)</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="menu-section fade-in">
+        <h3>出張カット<span>※小牧市内。市外は別途出張費がかかります。</span></h3>
+        <table class="menu-table">
+          <tr>
+            <th>大人カット＆ブロー</th>
+            <td><span class="price-tag">3,400円</span> (税込)</td>
+          </tr>
+          <tr>
+            <th>小人カット＆ブロー</th>
+            <td><span class="price-tag">2,800円</span> (税込)</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="text-align:left; font-weight:normal; font-size:0.9em; color:#666; padding-top:20px;">
+              <span class="note">※顔そり、ドライシャンプーは別途 各1,100円</span>
+              <span class="note">※小牧市外の出張費については、お電話にてお問い合わせください。</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="sidebar fade-in">
+      <div class="side-box side-menu">
+        <h3>SITE MENU</h3>
+        <ul>
+          <li><a href="index.html">トップページ</a></li>
+          <li><a href="menu.html">メニュー・料金</a></li>
+          <li><a href="shop.html">店舗のご案内</a></li>
+          <li><a href="access.html">アクセスマップ</a></li>
+        </ul>
+      </div>
+
+      <div class="side-box">
+        <h3>営業時間</h3>
+        <p style="font-size:0.9em; line-height:1.8;">
+          午前 9:30 ～ 午後 7:30<br>
+          <strong>定休日：</strong>月曜、第３月火<br>
+          <span style="font-size:0.85em; color:#666;">※月曜祝日の場合は営業、火曜振替定休</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 10px;">とこやさん</div>
+    <p style="font-size: 0.9em; margin: 0;">
+      〒485-0062 愛知県小牧市藤島町中島13-2<br>
+      TEL: 0568-77-3335
+    </p>
+    <div class="page-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+      ▲ ページトップへ戻る
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const faders = document.querySelectorAll('.fade-in');
+      const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+      const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, appearOptions);
+      faders.forEach(fader => appearOnScroll.observe(fader));
+    });
+  </script>
+
+</body>
+</html>

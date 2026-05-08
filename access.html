@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>アクセスマップ | とこやさん tokoya-san 小牧 春日井 北名古屋</title>
+<meta name="copyright" content="Toshiharu Niwa" />
+<meta name="description" content="とこやさんホームページ アクセスマップ">
+<meta name="keywords" content="床屋,とこやさん,アクセス,地図,小牧,春日井,北名古屋,出張カット,訪問カット,tokoya-san">
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  /* 基本設定 (全ページ共通) */
+  :root {
+    --primary-color: #333;
+    --accent-color: #d35400;
+    --bg-color: #f9f9f9;
+    --text-color: #444;
+    --white: #ffffff;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+  }
+
+  a { color: var(--primary-color); text-decoration: none; transition: 0.3s; }
+  a:hover { color: var(--accent-color); }
+
+  /* アニメーション */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: 0.8s ease-out; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ヘッダー・ナビゲーション */
+  header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+  .header-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; }
+  .logo img { height: 50px; }
+  .contact-info { text-align: right; font-size: 0.9em; }
+  .contact-info strong { font-size: 1.4em; color: var(--accent-color); }
+
+  nav { background: var(--primary-color); }
+  nav ul { list-style: none; display: flex; justify-content: center; margin: 0; padding: 0; max-width: 1000px; margin: 0 auto; }
+  nav ul li { flex: 1; text-align: center; }
+  nav ul li a { display: block; color: #fff; padding: 15px 0; font-weight: bold; position: relative; }
+  nav ul li a::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background-color: var(--accent-color); transition: 0.3s; }
+  nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
+
+  .breadcrumb { max-width: 1000px; margin: 20px auto 0; padding: 0 20px; font-size: 0.85em; color: #888; }
+
+  /* メインレイアウト */
+  .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+  h2 { border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 30px; }
+  h2 span { display: block; font-size: 0.5em; color: #888; font-weight: normal; }
+
+  .access-box { background: var(--white); padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 30px; }
+  
+  /* 地図をレスポンシブにするための枠 */
+  .map-wrapper { 
+    position: relative; 
+    padding-bottom: 56.25%; /* 16:9のアスペクト比 */
+    height: 0; 
+    overflow: hidden; 
+    margin: 20px 0; 
+    border-radius: 8px; 
+    border: 1px solid #eee; 
+  }
+  .map-wrapper iframe { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100% !important; 
+    height: 100% !important; 
+  }
+
+  .btn-map { 
+    display: block; 
+    background: var(--accent-color); 
+    color: #fff; 
+    text-align: center; 
+    padding: 15px; 
+    border-radius: 5px; 
+    font-weight: bold; 
+    margin-top: 20px; 
+    font-size: 1.2em; 
+    box-shadow: 0 4px 0 #a04000; 
+    transition: 0.2s; 
+  }
+  .btn-map:hover { background: #e67e22; color: #fff; }
+  .btn-map:active { transform: translateY(3px); box-shadow: 0 1px 0 #a04000; }
+
+  /* フッター */
+  footer { background: var(--primary-color); color: #fff; text-align: center; padding: 40px 20px; margin-top: 50px; }
+  .page-top { display: inline-block; margin-top: 20px; padding: 10px 20px; background: var(--accent-color); color: #fff; border-radius: 5px; cursor: pointer; }
+
+  @media (max-width: 768px) {
+    .header-inner { flex-direction: column; gap: 10px; }
+    nav ul { flex-wrap: wrap; }
+    nav ul li { flex: 50%; }
+    .access-box { padding: 20px; }
+  }
+</style>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JHGB83G213"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JHGB83G213');
+</script>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <a href="index.html">
+          <img src="http://tokoya-san.com/img/logo2.png" alt="とこやさんロゴ" />
+        </a>
+      </div>
+      <div class="contact-info">
+        お問い合わせ・ご相談はお気軽にどうぞ<br />
+        <span>Tel.</span> <strong>0568-77-3335</strong>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">トップページ<br><span style="font-size:0.7em;font-weight:normal;">HOME</span></a></li>
+        <li><a href="menu.html">メニュー・料金<br><span style="font-size:0.7em;font-weight:normal;">Menu/Price</span></a></li>
+        <li><a href="shop.html">店舗のご案内<br><span style="font-size:0.7em;font-weight:normal;">Information</span></a></li>
+        <li><a href="access.html" class="active">アクセスマップ<br><span style="font-size:0.7em;font-weight:normal;">Access</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="index.html">トップページ</a> ＞ <strong>アクセスマップ</strong>
+  </div>
+
+  <div class="container">
+    <div class="fade-in">
+      <h2>アクセスマップ<span>Access map</span></h2>
+    </div>
+
+    <div class="access-box fade-in">
+      <h3>アクセス方法<span>Access</span></h3>
+      <p>
+        <strong>住所：</strong>愛知県小牧市藤島町中島13-2<br>
+        <strong>駐車場：</strong>お店の前に2台、西隅カトミ駐車場内（スナック千さんと共同）3台、東奥1台をご利用下さい。
+      </p>
+      
+      <div class="map-wrapper">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3873.855302993667!2d136.88842043816848!3d35.26841841891544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600374b10dd0cd9b%3A0xe4aafff846eb156f!2z44Go44GT44KE44GV44KT!5e0!3m2!1sja!2sjp!4v1778227552678!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <a href="https://www.google.com/maps/search/?api=1&query=愛知県小牧市藤島町中島13-2+とこやさん" class="btn-map" target="_blank">
+        Googleマップアプリで開く
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 10px;">とこやさん</div>
+    <p style="font-size: 0.9em; margin: 0;">
+      〒485-0062 愛知県小牧市藤島町中島13-2<br>
+      TEL: 0568-77-3335
+    </p>
+    <div class="page-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+      ▲ ページトップへ戻る
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const faders = document.querySelectorAll('.fade-in');
+      const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      faders.forEach(fader => appearOnScroll.observe(fader));
+    });
+  </script>
+</body>
+</html>
